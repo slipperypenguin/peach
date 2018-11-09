@@ -1,23 +1,30 @@
 import RPi.GPIO as GPIO
 import time
-GPIO.setmode(GPIO.BOARD)
-control_pins = [7,11,13,15]
-for pin in control_pins:
-  GPIO.setup(pin, GPIO.OUT)
-  GPIO.output(pin, 0)
-halfstep_seq = [
-  [1,0,0,0],
-  [1,1,0,0],
-  [0,1,0,0],
-  [0,1,1,0],
-  [0,0,1,0],
-  [0,0,1,1],
-  [0,0,0,1],
-  [1,0,0,1]
-]
-for i in range(512):
-  for halfstep in range(8):
-    for pin in range(4):
-      GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
-    time.sleep(0.001)
-GPIO.cleanup()
+
+class stepMotor(object):
+    def __init__(self, control_pins):
+        GPIO.setmode(GPIO.BOARD)
+        self.control_pins = control_pins
+        self.prev = 0
+        self.halfstep_seq = [
+            [1,0,0,0],
+            [1,1,0,0],
+            [0,1,0,0],
+            [0,1,1,0],
+            [0,0,1,0],
+            [0,0,1,1],
+            [0,0,0,1],
+            [1,0,0,1]
+          ]
+
+         for pin in self.control_pins:
+             GPIO.setup(pin, GPIO.OUT)
+             GPIO.output(pin, 0)
+
+    def rotate(self, n):
+        int(n)
+        ## need to write this still
+
+
+    def close(self):
+        GPIO.cleanup

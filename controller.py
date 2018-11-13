@@ -1,4 +1,5 @@
 from stepMotor import stepMotor
+import time
 
 def calibrate(iters = 20):
     leftMotor = stepMotor([7,11,13,15])
@@ -9,3 +10,6 @@ def calibrate(iters = 20):
         rightMotor.rotate(step)
         leftMotor.rotate(-step)
         rightMotor.rotate(-step)
+
+    leftMotor.close()
+    rightMotor.close()

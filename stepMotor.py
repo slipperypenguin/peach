@@ -17,29 +17,29 @@ class stepMotor(object):
             [1,0,0,1]
           ]
 
-         for pin in self.control_pins:
+        for pin in self.control_pins:
             GPIO.setup(pin, GPIO.OUT)
             GPIO.output(pin, 0)
 
-    def rotate(self, n):
-        #int(n)
+    def rotate(self, x):
+        #int(x)
         ## need to write this still
-        n = int(n)
-        if n < 0:
-            ii = -1
-        elif n > 0:
-            ii = 1
+        x = int(x)
+        if x < 0:
+            step = -1
+        elif x > 0:
+            step = 1
         else:
             return
-        if ii != self.prev:
+        if step != self.prev:
             print('re-aligning')
-            n += 24*ii
-        for i in range(int(abs(n))):
+            x += 24*step
+        for i in range(int(abs(x))):
           for halfstep in range(8):
             for pin in range(4):
-              GPIO.output(self.control_pins[pin], self.halfstep_seq[::ii][halfstep][pin])
+              GPIO.output(self.control_pins[pin], self.halfstep_seq[::step][halfstep][pin])
             time.sleep(0.002)
-        self.prev = ii
+        self.prev = step
 
 
     def close(self):

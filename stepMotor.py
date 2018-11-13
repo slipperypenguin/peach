@@ -22,8 +22,7 @@ class stepMotor(object):
             GPIO.output(pin, 0)
 
     def rotate(self, x):
-        #int(x)
-        ## need to write this still
+        ## need to test
         x = int(x)
         if x < 0:
             step = -1

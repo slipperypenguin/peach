@@ -13,3 +13,5 @@ def calibrate(iters = 20):
 
     leftMotor.close()
     rightMotor.close()
+
+calibrate()

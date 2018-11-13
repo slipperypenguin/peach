@@ -18,8 +18,8 @@ class stepMotor(object):
           ]
 
          for pin in self.control_pins:
-             GPIO.setup(pin, GPIO.OUT)
-             GPIO.output(pin, 0)
+            GPIO.setup(pin, GPIO.OUT)
+            GPIO.output(pin, 0)
 
     def rotate(self, n):
         #int(n)

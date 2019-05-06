@@ -6,8 +6,10 @@ class stepMotor(object):
     def __init__(self, control_pins):
         GPIO.setmode(GPIO.BOARD)
         self.control_pins = control_pins
+        self.running = False
         self.on = False
         self.clockwise = True
+        self.freq = 0.001
         for pin in self.control_pins:
             GPIO.setup(pin, GPIO.OUT)
             GPIO.output(pin, 0)
@@ -19,6 +21,7 @@ class stepMotor(object):
             else:
                 i = 7-x
             self.setOutput(i)
+            time.sleep(self.freq)
             if not self.on:
                     break 
 
@@ -32,11 +35,27 @@ class stepMotor(object):
         else:
             self.clockwise = False
 
-    def run(self):
-        while(True):
-            time.sleep(.001)
+    def start(self):
+        self.on = True
+
+    def stop(self):
+        self.on  = False
+
+    def turnOn(self):
+        self.running = True
+        while(self.running):
+            time.sleep(self.freq)
             while(self.on):
                self.turn()
-            
+    
+    def turnOff(self):
+        self.running = False
+
+    def setSpeed(self, s):
+        self.freq = 0.001 / s
+
+    def reset(self):
+        self.freq = 0.001
+
     def close(self):
         GPIO.cleanup

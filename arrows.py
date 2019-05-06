@@ -2,14 +2,15 @@ from pynput import keyboard
 from consts import leftMotor, rightMotor
 from stepMotor import stepMotor
 from threading import Thread
+import os
 
 horizontal = stepMotor(leftMotor)
 vertical = stepMotor(rightMotor)
 
-horizontalChannel = Thread(target=horizontal.run, args=())
+horizontalChannel = Thread(target=horizontal.turnOn, args=())
 horizontalChannel.start()
 
-verticalChannel = Thread(target=vertical.run, args=())
+verticalChannel = Thread(target=vertical.turnOn, args=())
 verticalChannel.start()
 
 
